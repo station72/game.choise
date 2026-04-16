@@ -1,0 +1,103 @@
+[
+  {
+    "id": "grief_own_business",
+    "triggerCondition": { "flag": "closed_own_business" },
+    "weight": 4,
+    "cooldownMonths": 24,
+    "defaultOutcomeId": "grieve",
+    "outcomes": [
+      {
+        "id": "grieve",
+        "text": "Иногда ночью ты думаешь о том, что могло бы быть. Своё дело — это была не просто идея, это был образ себя. Теперь этот образ остался только в прошлом.",
+        "effects": { "vitality": -5, "fragility": 5 }
+      }
+    ]
+  },
+  {
+    "id": "relief_career_race_closed",
+    "triggerCondition": { "flag": "closed_career_race" },
+    "weight": 3,
+    "cooldownMonths": 18,
+    "defaultOutcomeId": "exhale",
+    "outcomes": [
+      {
+        "id": "exhale",
+        "text": "Ты наконец выдохнул. Гонка окончена — не потому что ты победил, а потому что ты решил: это была не твоя гонка. Странно, но стало немного легче.",
+        "effects": { "stress": -8, "vitality": -3, "energy": 5 }
+      }
+    ]
+  },
+  {
+    "id": "grief_family_dream",
+    "triggerCondition": { "flag": "closed_family_dream" },
+    "weight": 4,
+    "cooldownMonths": 20,
+    "defaultOutcomeId": "mourn",
+    "outcomes": [
+      {
+        "id": "mourn",
+        "text": "На свадьбе знакомых ты поймал себя на том, что завидуешь — не им, а возможности, от которой сам отказался. Это больно и честно одновременно.",
+        "effects": { "vitality": -6, "estrangement": 5, "closeness": -3 }
+      }
+    ]
+  },
+  {
+    "id": "regret_personal_dream",
+    "triggerCondition": {
+      "and": [
+        { "flag": "closed_personal_dream" },
+        { "stat": "totalMonths", "op": ">=", "value": 60 }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 30,
+    "defaultOutcomeId": "what_if",
+    "outcomes": [
+      {
+        "id": "what_if",
+        "text": "На середине пути — если это и правда середина — ты вспомнил, чего хотел когда-то. Не помогает. Но и не отпускает.",
+        "effects": { "vitality": -8, "fragility": 8 }
+      }
+    ]
+  },
+  {
+    "id": "defocus_warning",
+    "triggerCondition": { "flag": "defocus_severe" },
+    "weight": 5,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "scattered",
+    "outcomes": [
+      {
+        "id": "scattered",
+        "text": "Ты берёшься за всё сразу и не заканчиваешь ничего. Каждое дело тянет на себя, и ты чувствуешь, как распыляешься. Что-то надо закрыть — или отпустить.",
+        "effects": { "stress": 5, "energy": -5 },
+        "playerChoice": {
+          "optionA": {
+            "text": "Продолжаю держать всё под контролем",
+            "effects": { "burnout": 8, "stress": 5 }
+          },
+          "optionB": {
+            "text": "Пора от чего-то отказаться",
+            "effects": { "vitality": -3, "stress": -8, "energy": 5 }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "lifeline_suspended_too_long",
+    "triggerCondition": {
+      "flag": "has_suspended_line_over_6_months"
+    },
+    "weight": 3,
+    "cooldownMonths": 8,
+    "defaultOutcomeId": "limbo",
+    "outcomes": [
+      {
+        "id": "limbo",
+        "text": "Некоторые дела висят в воздухе уже очень долго. Не начатые и не брошенные — они продолжают занимать место в голове, не давая сосредоточиться.",
+        "effects": { "stress": 5, "vitality": -3 }
+      }
+    ]
+  }
+]

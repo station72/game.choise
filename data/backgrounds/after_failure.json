@@ -1,0 +1,23 @@
+{
+  "id": "after_failure",
+  "name": "После провала",
+  "description": "Попытка «своего» уже была и не удалась. Стресс высокий, деньги низкие, карьера просела. Личная линия очень живая.",
+  "startingAge": 25,
+  "startingStats": {
+    "money": 18,
+    "energy": 45,
+    "health": 50,
+    "closeness": 40,
+    "career": 20,
+    "stress": 65
+  },
+  "startingHiddenStats": {
+    "burnout": 40,
+    "fragility": 50,
+    "estrangement": 25,
+    "vitality": 80
+  },
+  "startingRelationshipState": "single",
+  "traits": ["resilient", "scarred", "low_income", "high_vitality", "post_failure"],
+  "availablePersonalLines": ["build_own", "create", "express", "be_free", "leave_a_mark"]
+}

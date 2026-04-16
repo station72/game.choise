@@ -1,0 +1,23 @@
+{
+  "id": "smart_but_poor",
+  "name": "Умный, но бедный",
+  "description": "Тёплая, но бедная семья. Талант есть, денег нет. Живёт в режиме осторожности.",
+  "startingAge": 25,
+  "startingStats": {
+    "money": 20,
+    "energy": 70,
+    "health": 65,
+    "closeness": 60,
+    "career": 30,
+    "stress": 45
+  },
+  "startingHiddenStats": {
+    "burnout": 10,
+    "fragility": 30,
+    "estrangement": 10,
+    "vitality": 70
+  },
+  "startingRelationshipState": "single",
+  "traits": ["creative", "anxious", "low_income", "warm_background"],
+  "availablePersonalLines": ["create", "express", "explore", "leave_a_mark", "be_needed"]
+}

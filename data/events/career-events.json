@@ -1,0 +1,132 @@
+[
+  {
+    "id": "promotion_offer",
+    "title": "Предложение о повышении",
+    "description": "Начальник предлагает должность с большей ответственностью и зарплатой. Придётся ближайшие месяцы жить почти без воздуха.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "career", "op": ">=", "value": 55 },
+        { "hasTag": "career_focus" }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 18,
+    "requiresActionTag": "work",
+    "defaultOutcomeId": "accept_cautiously",
+    "tags": ["career", "milestone"],
+    "outcomes": [
+      {
+        "id": "accept_enthusiastically",
+        "description": "Берёте с энтузиазмом. Карьера рванула вперёд, но тело уже чувствует цену.",
+        "effects": { "career": 15, "money": 10, "stress": 16, "energy": -10, "burnout": 6 },
+        "flagsSet": ["promoted_once"],
+        "playerChoice": {
+          "optionA": { "text": "Принять с энтузиазмом", "effects": { "career": 15, "money": 10, "stress": 16, "energy": -10, "burnout": 6 } },
+          "optionB": { "text": "Принять осторожно", "effects": { "career": 10, "money": 7, "stress": 9, "energy": -5 } }
+        }
+      },
+      {
+        "id": "accept_cautiously",
+        "description": "Соглашаетесь, но выговариваете условия. Меньше роста, меньше давления.",
+        "effects": { "career": 10, "money": 7, "stress": 9, "energy": -5 },
+        "flagsSet": ["promoted_once"]
+      }
+    ]
+  },
+  {
+    "id": "layoff_threat",
+    "title": "Угроза сокращения",
+    "description": "Компания режет штат. Ваша позиция под вопросом.",
+    "triggerCondition": {
+      "or": [
+        { "stat": "career", "op": "<=", "value": 35 },
+        { "hasTag": "avoidance" }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "survive",
+    "tags": ["career", "crisis", "financial"],
+    "outcomes": [
+      {
+        "id": "survive",
+        "description": "Вас не уволили, но атмосфера стала тяжелее.",
+        "effects": { "career": -5, "stress": 12, "money": -5, "fragility": 5 },
+        "playerChoice": {
+          "optionA": { "text": "Активно доказывать нужность", "effects": { "career": 3, "stress": 15, "energy": -8 } },
+          "optionB": { "text": "Держаться тихо", "effects": { "career": -5, "stress": 10, "money": -5 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "project_success",
+    "title": "Проект выстрелил",
+    "description": "Проект, которому вы отдали много сил, получил признание.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "career", "op": ">=", "value": 50 },
+        { "hasTag": "work" }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 10,
+    "defaultOutcomeId": "success",
+    "tags": ["career", "milestone", "positive"],
+    "outcomes": [
+      {
+        "id": "success",
+        "description": "Коллеги заметили. Руководство оценило. Есть ощущение, что работа имеет смысл.",
+        "effects": { "career": 8, "money": 5, "stress": -6, "vitality": 6 }
+      }
+    ]
+  },
+  {
+    "id": "burnout_warning",
+    "title": "Тело сигналит",
+    "description": "Вы просыпаетесь уставшим. Не от вчерашнего дня — от последних месяцев.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "burnout", "op": ">=", "value": 60 },
+        { "stat": "energy", "op": "<=", "value": 35 }
+      ]
+    },
+    "weight": 4,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "ignore",
+    "tags": ["health", "burnout", "warning"],
+    "outcomes": [
+      {
+        "id": "ignore",
+        "description": "Продолжаете в том же темпе. Сигналы тела остаются без ответа.",
+        "effects": { "burnout": 8, "health": -5, "fragility": 5 },
+        "playerChoice": {
+          "optionA": { "text": "Остановиться и взять паузу", "effects": { "energy": 10, "burnout": -12, "stress": -8, "career": -5 } },
+          "optionB": { "text": "Продолжать — некогда ломаться", "effects": { "burnout": 8, "health": -5, "fragility": 5 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "unexpected_bonus",
+    "title": "Неожиданная премия",
+    "description": "Квартальная премия пришла больше, чем вы ждали.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "career", "op": ">=", "value": 45 },
+        { "stat": "money", "op": ">=", "value": 30 }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 8,
+    "defaultOutcomeId": "receive",
+    "tags": ["career", "financial", "positive"],
+    "outcomes": [
+      {
+        "id": "receive",
+        "description": "Деньги пришли кстати. Небольшой выдох.",
+        "effects": { "money": 15, "stress": -4 }
+      }
+    ]
+  }
+]

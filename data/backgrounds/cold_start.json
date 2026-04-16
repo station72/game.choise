@@ -1,0 +1,23 @@
+{
+  "id": "cold_start",
+  "name": "Холодный старт",
+  "description": "Бедная и холодная семья. Деньги низкие, близость низкая, стресс выше нормы. Сильный потенциал достигаторства, тяжёлый доступ к доверию.",
+  "startingAge": 25,
+  "startingStats": {
+    "money": 15,
+    "energy": 55,
+    "health": 55,
+    "closeness": 25,
+    "career": 25,
+    "stress": 55
+  },
+  "startingHiddenStats": {
+    "burnout": 20,
+    "fragility": 45,
+    "estrangement": 40,
+    "vitality": 50
+  },
+  "startingRelationshipState": "single",
+  "traits": ["driven", "distrustful", "low_income", "cold_background", "high_stress_baseline"],
+  "availablePersonalLines": ["build_own", "be_free", "leave_a_mark", "create"]
+}

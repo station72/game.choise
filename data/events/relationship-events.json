@@ -1,0 +1,130 @@
+[
+  {
+    "id": "partner_needs_talk",
+    "title": "Партнёр просит поговорить",
+    "description": "«Нам надо поговорить.» Не скандал — но что-то накопилось.",
+    "triggerCondition": {
+      "and": [
+        { "not": { "flag": "relationship_single" } },
+        { "stat": "closeness", "op": "<=", "value": 45 }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "postpone",
+    "tags": ["relationship", "emotional", "crisis"],
+    "outcomes": [
+      {
+        "id": "postpone",
+        "description": "Вы откладываете. Напряжение остаётся.",
+        "effects": { "closeness": -8, "estrangement": 8, "stress": 6 },
+        "playerChoice": {
+          "optionA": { "text": "Поговорить честно сейчас", "effects": { "closeness": 10, "estrangement": -8, "stress": 5, "energy": -8 } },
+          "optionB": { "text": "Отложить — сейчас не время", "effects": { "closeness": -8, "estrangement": 8, "stress": 6 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "distance_growing",
+    "title": "Дистанция нарастает",
+    "description": "Вы живёте рядом, но всё реже разговариваете по-настоящему.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "estrangement", "op": ">=", "value": 50 },
+        { "not": { "flag": "relationship_single" } }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 4,
+    "defaultOutcomeId": "drift",
+    "tags": ["relationship", "warning", "estrangement"],
+    "outcomes": [
+      {
+        "id": "drift",
+        "description": "Молчание становится нормой. Отдаление фиксируется.",
+        "effects": { "closeness": -6, "estrangement": 6, "vitality": -3 }
+      }
+    ]
+  },
+  {
+    "id": "friend_offers_help",
+    "title": "Друг предлагает помощь",
+    "description": "Старый друг видит, что вам нелегко, и предлагает поддержку.",
+    "triggerCondition": {
+      "or": [
+        { "stat": "stress", "op": ">=", "value": 60 },
+        { "stat": "money", "op": "<=", "value": 20 }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 10,
+    "defaultOutcomeId": "accept",
+    "tags": ["social", "support", "positive"],
+    "outcomes": [
+      {
+        "id": "accept",
+        "description": "Принять помощь — это тоже умение. Чуть легче.",
+        "effects": { "closeness": 8, "stress": -8, "vitality": 4 },
+        "playerChoice": {
+          "optionA": { "text": "Принять и поговорить", "effects": { "closeness": 8, "stress": -8, "vitality": 4 } },
+          "optionB": { "text": "Сказать «всё нормально»", "effects": { "closeness": -3, "estrangement": 4, "stress": 2 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "conflict_absence",
+    "title": "Конфликт из-за отсутствия",
+    "description": "Вас снова не было дома. Партнёр больше не молчит.",
+    "triggerCondition": {
+      "and": [
+        { "not": { "flag": "relationship_single" } },
+        {
+          "or": [
+            { "hasTag": "overworked" },
+            { "hasTag": "career_focus" }
+          ]
+        },
+        { "stat": "closeness", "op": "<=", "value": 50 }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 5,
+    "defaultOutcomeId": "argue",
+    "tags": ["relationship", "conflict", "career"],
+    "outcomes": [
+      {
+        "id": "argue",
+        "description": "Скандал. Слова сказаны. Что-то треснуло.",
+        "effects": { "closeness": -10, "estrangement": 10, "stress": 12, "energy": -6 },
+        "playerChoice": {
+          "optionA": { "text": "Выслушать и признать", "effects": { "closeness": -3, "estrangement": 3, "stress": 8, "energy": -8 } },
+          "optionB": { "text": "Защищаться и объяснять", "effects": { "closeness": -12, "estrangement": 12, "stress": 14 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "relationship_milestone",
+    "title": "Хороший период в отношениях",
+    "description": "Что-то сложилось. Разговоры, совместное время, ощущение близости.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "closeness", "op": ">=", "value": 65 },
+        { "not": { "flag": "relationship_single" } }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 8,
+    "defaultOutcomeId": "warmth",
+    "tags": ["relationship", "positive"],
+    "outcomes": [
+      {
+        "id": "warmth",
+        "description": "Тепло внутри. Не каждый месяц такое бывает.",
+        "effects": { "closeness": 6, "estrangement": -5, "stress": -6, "vitality": 4 }
+      }
+    ]
+  }
+]

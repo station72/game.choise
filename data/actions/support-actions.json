@@ -1,0 +1,116 @@
+[
+  {
+    "id": "see_doctor",
+    "name": "Сходить к врачу",
+    "description": "Плановый осмотр или тревожный симптом — наконец разобраться.",
+    "effects": { "health": 6, "fragility": -5, "stress": -3 },
+    "moneyCost": 5,
+    "tags": ["health", "medical"],
+    "availableIf": { "stat": "money", "op": ">=", "value": 5 }
+  },
+  {
+    "id": "talk_to_partner",
+    "name": "Поговорить с партнёром",
+    "description": "Честный разговор, даже если неудобный.",
+    "effects": { "closeness": 10, "estrangement": -8, "stress": -4 },
+    "energyCost": 8,
+    "tags": ["relationship", "connection", "emotional"],
+    "availableIf": {
+      "and": [
+        { "not": { "flag": "relationship_single" } },
+        { "stat": "energy", "op": ">=", "value": 8 }
+      ]
+    }
+  },
+  {
+    "id": "time_with_child",
+    "name": "Провести время с ребёнком",
+    "description": "Настоящее присутствие, без телефона.",
+    "effects": { "closeness": 8, "vitality": 5, "stress": -3 },
+    "energyCost": 6,
+    "tags": ["family", "parenting", "connection"],
+    "availableIf": {
+      "and": [
+        { "flag": "has_child" },
+        { "stat": "energy", "op": ">=", "value": 6 }
+      ]
+    }
+  },
+  {
+    "id": "save_money",
+    "name": "Отложить деньги",
+    "description": "Принудительно отложить часть дохода в запас.",
+    "effects": { "money": 8, "stress": -2, "vitality": -2 },
+    "tags": ["saving", "financial_focus"],
+    "availableIf": { "stat": "money", "op": ">=", "value": 15 }
+  },
+  {
+    "id": "no_extra_spending",
+    "name": "Не влезать в лишние траты",
+    "description": "Удержаться от импульсивных покупок этот месяц.",
+    "effects": { "money": 5, "stress": 3 },
+    "tags": ["saving", "frugal"],
+    "availableIf": null
+  },
+  {
+    "id": "see_a_friend",
+    "name": "Встретиться с другом",
+    "description": "Живой разговор, не в мессенджере.",
+    "effects": { "closeness": 6, "stress": -5, "vitality": 3 },
+    "energyCost": 5,
+    "tags": ["social", "connection", "rest"],
+    "availableIf": { "stat": "energy", "op": ">=", "value": 5 }
+  },
+  {
+    "id": "extra_job",
+    "name": "Взять подработку",
+    "description": "Дополнительный доход ценой времени и сил.",
+    "effects": { "money": 12, "energy": -10, "stress": 8, "burnout": 5 },
+    "tags": ["work", "money"],
+    "maxPerYear": 6,
+    "availableIf": { "stat": "energy", "op": ">=", "value": 15 }
+  },
+  {
+    "id": "weekend_off",
+    "name": "Отключиться на выходные",
+    "description": "Никакой работы, никаких планов. Просто побыть.",
+    "effects": { "energy": 10, "stress": -10, "burnout": -8, "vitality": 3 },
+    "tags": ["rest", "recovery", "self_care"],
+    "availableIf": null
+  },
+  {
+    "id": "survive_the_month",
+    "name": "Пропустить всё и дожить месяц",
+    "description": "Никаких поддерживающих шагов. Просто выжить.",
+    "effects": { "stress": 5, "vitality": -3 },
+    "tags": ["passive", "avoidance"],
+    "availableIf": null
+  },
+  {
+    "id": "personal_evening",
+    "name": "Выделить вечер на своё",
+    "description": "Пара часов без обязательств — на то, что наполняет.",
+    "effects": { "vitality": 7, "stress": -4, "energy": -4 },
+    "energyCost": 4,
+    "tags": ["personal_line", "creative", "self_expression"],
+    "availableIf": { "stat": "energy", "op": ">=", "value": 4 }
+  },
+  {
+    "id": "therapy",
+    "name": "Сходить к психологу",
+    "description": "Один-два сеанса. Помогает разобраться в паттернах.",
+    "effects": { "stress": -10, "fragility": -8, "vitality": 5 },
+    "moneyCost": 10,
+    "tags": ["mental_health", "self_investment", "emotional"],
+    "maxPerYear": 12,
+    "availableIf": { "stat": "money", "op": ">=", "value": 10 }
+  },
+  {
+    "id": "skip_sport",
+    "name": "Пропустить спорт",
+    "description": "Нет сил, нет времени. Тело подождёт.",
+    "effects": { "health": -4, "energy": 3 },
+    "tags": ["passive"],
+    "availableIf": null
+  }
+]

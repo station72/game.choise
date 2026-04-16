@@ -1,0 +1,74 @@
+[
+  {
+    "id": "own_business",
+    "name": "Своё дело",
+    "description": "Мечта построить что-то своё — компанию, проект, дело, которое останется после тебя.",
+    "closureEffects": { "vitality": -15, "stress": -10, "energy": 5 },
+    "closureFlag": "closed_own_business",
+    "affectedEndingPortraits": ["the_exhausted_builder", "the_realist"]
+  },
+  {
+    "id": "personal_dream",
+    "name": "Личная мечта",
+    "description": "Что-то глубоко личное: написать книгу, объехать мир, выступить на сцене.",
+    "closureEffects": { "vitality": -20, "fragility": 10 },
+    "closureFlag": "closed_personal_dream",
+    "affectedEndingPortraits": ["the_survivor", "the_hollow"]
+  },
+  {
+    "id": "career_race",
+    "name": "Карьерная гонка",
+    "description": "Стремление достичь вершины — должность, статус, признание профессионального сообщества.",
+    "closureEffects": { "career": -10, "stress": -15, "vitality": -8 },
+    "closureFlag": "closed_career_race",
+    "affectedEndingPortraits": ["the_burnout", "the_balanced"]
+  },
+  {
+    "id": "family_dream",
+    "name": "Семейная мечта",
+    "description": "Желание создать настоящую семью — партнёра, дом, совместную жизнь.",
+    "closureEffects": { "vitality": -12, "estrangement": 10, "closeness": -5 },
+    "closureFlag": "closed_family_dream",
+    "affectedEndingPortraits": ["the_lone_wolf", "the_survivor"]
+  },
+  {
+    "id": "child_dream",
+    "name": "Мечта о ребёнке",
+    "description": "Желание стать родителем — воспитать, передать что-то важное следующему поколению.",
+    "closureEffects": { "vitality": -18, "fragility": 8 },
+    "closureFlag": "closed_child_dream",
+    "affectedEndingPortraits": ["the_hollow", "the_survivor"]
+  },
+  {
+    "id": "parent_reconciliation",
+    "name": "Примирение с родителями",
+    "description": "Надежда залечить старые раны и выстроить настоящий контакт с мамой и папой.",
+    "closureEffects": { "vitality": -10, "fragility": 5, "stress": -5 },
+    "closureFlag": "closed_parent_reconciliation",
+    "affectedEndingPortraits": ["the_realist", "the_hollow"]
+  },
+  {
+    "id": "parent_approval_father",
+    "name": "Одобрение отца",
+    "description": "Глубокая потребность доказать что-то отцу — получить его признание или принятие.",
+    "closureEffects": { "vitality": -8, "burnout": -5, "fragility": 5 },
+    "closureFlag": "closed_parent_approval_father",
+    "affectedEndingPortraits": ["the_realist", "the_lone_wolf"]
+  },
+  {
+    "id": "parent_approval_mother",
+    "name": "Одобрение матери",
+    "description": "Желание получить тепло и принятие матери — или наконец отпустить эту потребность.",
+    "closureEffects": { "vitality": -8, "burnout": -5, "fragility": 5 },
+    "closureFlag": "closed_parent_approval_mother",
+    "affectedEndingPortraits": ["the_realist", "the_lone_wolf"]
+  },
+  {
+    "id": "another_life_illusion",
+    "name": "Иллюзия другой жизни",
+    "description": "Фантазия о параллельной жизни, которую ты не выбрал — другой город, другая работа, другой человек рядом.",
+    "closureEffects": { "vitality": -5, "stress": -12, "fragility": -5 },
+    "closureFlag": "closed_another_life_illusion",
+    "affectedEndingPortraits": ["the_balanced", "the_realist"]
+  }
+]

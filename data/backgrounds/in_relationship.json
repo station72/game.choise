@@ -1,0 +1,23 @@
+{
+  "id": "in_relationship",
+  "name": "Уже в отношениях",
+  "description": "25 лет, в долгих отношениях. Карьера ещё строится. Близость выше, свобода ниже.",
+  "startingAge": 25,
+  "startingStats": {
+    "money": 38,
+    "energy": 58,
+    "health": 65,
+    "closeness": 70,
+    "career": 32,
+    "stress": 35
+  },
+  "startingHiddenStats": {
+    "burnout": 10,
+    "fragility": 20,
+    "estrangement": 10,
+    "vitality": 60
+  },
+  "startingRelationshipState": "committed",
+  "traits": ["stable", "committed", "relationship_pressure"],
+  "availablePersonalLines": ["create", "explore", "be_needed", "build_own", "express"]
+}

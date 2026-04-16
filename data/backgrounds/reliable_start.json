@@ -1,0 +1,23 @@
+{
+  "id": "reliable_start",
+  "name": "Надёжный старт",
+  "description": "Обычная семья, первая стабильная работа, живёшь один. Нормальная энергия, слабый капитал.",
+  "startingAge": 25,
+  "startingStats": {
+    "money": 40,
+    "energy": 60,
+    "health": 65,
+    "closeness": 45,
+    "career": 35,
+    "stress": 30
+  },
+  "startingHiddenStats": {
+    "burnout": 10,
+    "fragility": 20,
+    "estrangement": 15,
+    "vitality": 65
+  },
+  "startingRelationshipState": "single",
+  "traits": ["stable", "practical"],
+  "availablePersonalLines": ["create", "explore", "build_own", "be_free", "leave_a_mark"]
+}

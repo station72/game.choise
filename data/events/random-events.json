@@ -1,0 +1,134 @@
+[
+  {
+    "id": "unexpected_expense",
+    "title": "Неожиданный расход",
+    "description": "Машина, зубы, холодильник. Что-то сломалось — как всегда не вовремя.",
+    "triggerCondition": {
+      "stat": "money",
+      "op": ">=",
+      "value": 10
+    },
+    "weight": 3,
+    "cooldownMonths": 4,
+    "defaultOutcomeId": "pay",
+    "tags": ["financial", "random", "setback"],
+    "outcomes": [
+      {
+        "id": "pay",
+        "description": "Пришлось заплатить. Бюджет просел.",
+        "effects": { "money": -12, "stress": 6 }
+      }
+    ]
+  },
+  {
+    "id": "city_noise",
+    "title": "Напряжённый месяц в городе",
+    "description": "Плотный трафик, очереди, новости. Фоновый шум стал чуть громче.",
+    "triggerCondition": {
+      "stat": "stress",
+      "op": ">=",
+      "value": 45
+    },
+    "weight": 2,
+    "cooldownMonths": 3,
+    "defaultOutcomeId": "absorb",
+    "tags": ["random", "stress"],
+    "outcomes": [
+      {
+        "id": "absorb",
+        "description": "Город давит. Вы привыкли — но это не значит, что это нормально.",
+        "effects": { "stress": 5, "energy": -3 }
+      }
+    ]
+  },
+  {
+    "id": "old_dream",
+    "title": "Старая мечта напомнила о себе",
+    "description": "Фотография, случайная песня, разговор — что-то вернуло образ того, кем вы хотели стать.",
+    "triggerCondition": {
+      "stat": "vitality",
+      "op": "<=",
+      "value": 50
+    },
+    "weight": 2,
+    "cooldownMonths": 8,
+    "defaultOutcomeId": "feel_it",
+    "tags": ["inner", "personal_line", "nostalgia"],
+    "outcomes": [
+      {
+        "id": "feel_it",
+        "description": "Больно и тепло одновременно. Это всё ещё живо.",
+        "effects": { "vitality": 5, "stress": 4 },
+        "playerChoice": {
+          "optionA": { "text": "Позволить себе почувствовать", "effects": { "vitality": 8, "stress": 4, "fragility": -3 } },
+          "optionB": { "text": "Переключиться", "effects": { "vitality": -3, "stress": -2 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "small_joy",
+    "title": "Маленькая радость",
+    "description": "Ничего особенного — но этот месяц что-то порадовало по-настоящему.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "stress", "op": "<=", "value": 55 },
+        { "stat": "health", "op": ">=", "value": 45 }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 3,
+    "defaultOutcomeId": "notice",
+    "tags": ["positive", "random"],
+    "outcomes": [
+      {
+        "id": "notice",
+        "description": "Заметить — уже достаточно.",
+        "effects": { "vitality": 4, "stress": -4, "energy": 3 }
+      }
+    ]
+  },
+  {
+    "id": "inflation_hit",
+    "title": "Выросли цены",
+    "description": "Продукты, аренда, транспорт. Жизнь стала чуть дороже без видимых причин.",
+    "triggerCondition": {
+      "stat": "money",
+      "op": "<=",
+      "value": 55
+    },
+    "weight": 2,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "absorb",
+    "tags": ["financial", "world", "random"],
+    "outcomes": [
+      {
+        "id": "absorb",
+        "description": "Бюджет стал чуть теснее. Всё то же самое стоит больше.",
+        "effects": { "money": -6, "stress": 5 }
+      }
+    ]
+  },
+  {
+    "id": "noticed_time_passing",
+    "title": "Время идёт",
+    "description": "День рождения. Год закончился. Вы смотрите на фото пятилетней давности.",
+    "triggerCondition": {
+      "stat": "totalMonths",
+      "op": ">=",
+      "value": 12
+    },
+    "monthOfYear": 12,
+    "weight": 3,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "reflect",
+    "tags": ["inner", "time", "reflection"],
+    "outcomes": [
+      {
+        "id": "reflect",
+        "description": "Год прошёл. Вы не тот, кем были. Или тот — и это тоже ответ.",
+        "effects": { "stress": 3, "vitality": 3 }
+      }
+    ]
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "reliable_start",
+    "name": "Надёжный старт",
+    "subtitle": "Нормальная жизнь. Всё по плану.",
+    "backgroundId": "reliable_start",
+    "internalProfile": {
+      "fear": "fear_of_failure",
+      "compensation": "perfectionism",
+      "personalLine": "explore"
+    },
+    "startingRelationship": "single",
+    "hasChild": false,
+    "startingTraits": ["stable", "practical"]
+  },
+  {
+    "id": "smart_but_poor",
+    "name": "Умный, но бедный",
+    "subtitle": "Талант есть. Денег нет. Что дальше?",
+    "backgroundId": "smart_but_poor",
+    "internalProfile": {
+      "fear": "fear_of_poverty",
+      "compensation": "overwork",
+      "personalLine": "create"
+    },
+    "startingRelationship": "single",
+    "hasChild": false,
+    "startingTraits": ["creative", "anxious", "low_income"]
+  },
+  {
+    "id": "cold_start",
+    "name": "Холодный старт",
+    "subtitle": "Без тыла. Без опоры. С нуля.",
+    "backgroundId": "cold_start",
+    "internalProfile": {
+      "fear": "fear_of_poverty",
+      "compensation": "overwork",
+      "personalLine": "build_own"
+    },
+    "startingRelationship": "single",
+    "hasChild": false,
+    "startingTraits": ["driven", "distrustful", "low_income"]
+  },
+  {
+    "id": "in_relationship",
+    "name": "Уже в отношениях",
+    "subtitle": "Рядом есть человек. Это и опора, и цена.",
+    "backgroundId": "in_relationship",
+    "internalProfile": {
+      "fear": "fear_of_loneliness",
+      "compensation": "people_pleasing",
+      "personalLine": "be_needed"
+    },
+    "startingRelationship": "committed",
+    "hasChild": false,
+    "startingTraits": ["stable", "committed"]
+  },
+  {
+    "id": "young_family",
+    "name": "Молодая семья",
+    "subtitle": "Ребёнок есть. Теперь всё по-другому.",
+    "backgroundId": "young_family",
+    "internalProfile": {
+      "fear": "fear_of_failure",
+      "compensation": "people_pleasing",
+      "personalLine": "leave_a_mark"
+    },
+    "startingRelationship": "married",
+    "hasChild": true,
+    "startingTraits": ["parent", "married", "high_obligations"]
+  },
+  {
+    "id": "after_failure",
+    "name": "После провала",
+    "subtitle": "Попытка была. Не вышло. Что теперь?",
+    "backgroundId": "after_failure",
+    "internalProfile": {
+      "fear": "fear_of_meaninglessness",
+      "compensation": "risk_seeking",
+      "personalLine": "build_own"
+    },
+    "startingRelationship": "single",
+    "hasChild": false,
+    "startingTraits": ["resilient", "scarred", "post_failure"]
+  }
+]

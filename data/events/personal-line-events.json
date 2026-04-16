@@ -1,0 +1,118 @@
+[
+  {
+    "id": "creative_opportunity",
+    "title": "Шанс показать своё",
+    "description": "Возможность выступить, показать работу или сделать маленький шаг в своё.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "vitality", "op": ">=", "value": 50 },
+        {
+          "or": [
+            { "hasTag": "personal_line" },
+            { "hasTag": "creative" }
+          ]
+        }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 8,
+    "defaultOutcomeId": "take_it",
+    "tags": ["personal_line", "creative", "opportunity"],
+    "outcomes": [
+      {
+        "id": "take_it",
+        "description": "Сделали. Маленький, но настоящий шаг.",
+        "effects": { "vitality": 12, "stress": -5, "career": -2 },
+        "playerChoice": {
+          "optionA": { "text": "Сделать это — несмотря на страх", "effects": { "vitality": 12, "stress": -5, "career": -2 } },
+          "optionB": { "text": "Сказать «не готов ещё»", "effects": { "vitality": -5, "stress": -2 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "mentor_appears",
+    "title": "Учитель или ментор",
+    "description": "Человек, который делает то, к чему вы стремитесь. Он готов общаться.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "vitality", "op": ">=", "value": 55 },
+        {
+          "or": [
+            { "hasTag": "own_project" },
+            { "hasTag": "creative" },
+            { "hasTag": "personal_line" }
+          ]
+        }
+      ]
+    },
+    "weight": 1,
+    "cooldownMonths": 18,
+    "defaultOutcomeId": "connect",
+    "tags": ["personal_line", "mentor", "growth"],
+    "outcomes": [
+      {
+        "id": "connect",
+        "description": "Разговор, который долго будет греть. Вы не одни в этом.",
+        "effects": { "vitality": 10, "stress": -5, "career": 3, "fragility": -5 }
+      }
+    ]
+  },
+  {
+    "id": "personal_line_fading",
+    "title": "Своё тихо угасает",
+    "description": "Инструмент не доставали уже несколько месяцев. Файл с проектом не открывали.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "vitality", "op": "<=", "value": 35 },
+        { "stat": "personalLineIgnoredMonths", "op": ">=", "value": 4 }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "let_fade",
+    "tags": ["personal_line", "loss", "inner"],
+    "outcomes": [
+      {
+        "id": "let_fade",
+        "description": "Вы говорите себе «потом». Потом становится никогда.",
+        "effects": { "vitality": -8, "stress": 5, "estrangement": 4 },
+        "playerChoice": {
+          "optionA": { "text": "Вернуться — хоть на час", "effects": { "vitality": 6, "stress": -3, "energy": -4 } },
+          "optionB": { "text": "Это уже не актуально", "effects": { "vitality": -10, "stress": 3, "estrangement": 5 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "project_invite",
+    "title": "Приглашение в проект по душе",
+    "description": "Незнакомый человек увидел ваши работы и предлагает поучаствовать в совместном проекте.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "vitality", "op": ">=", "value": 60 },
+        {
+          "or": [
+            { "hasTag": "own_project" },
+            { "hasTag": "personal_line" }
+          ]
+        }
+      ]
+    },
+    "weight": 1,
+    "cooldownMonths": 14,
+    "defaultOutcomeId": "join",
+    "tags": ["personal_line", "opportunity", "creative"],
+    "outcomes": [
+      {
+        "id": "join",
+        "description": "Новые люди, новый импульс. Это может быть что-то настоящее.",
+        "effects": { "vitality": 10, "stress": 5, "career": 2, "money": -5, "energy": -6 },
+        "playerChoice": {
+          "optionA": { "text": "Согласиться", "effects": { "vitality": 10, "stress": 5, "career": 2, "money": -5, "energy": -6 } },
+          "optionB": { "text": "Отказаться — нет ресурса", "effects": { "vitality": -5, "stress": -2 } }
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "health_scare",
+    "title": "Тревожный симптом",
+    "description": "Что-то, что вы давно замечали, наконец даёт о себе знать серьёзнее.",
+    "triggerCondition": {
+      "or": [
+        { "stat": "health", "op": "<=", "value": 40 },
+        { "stat": "fragility", "op": ">=", "value": 60 }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 8,
+    "defaultOutcomeId": "check",
+    "tags": ["health", "crisis"],
+    "outcomes": [
+      {
+        "id": "check",
+        "description": "Анализы, врач, тревога и облегчение — пока не критично, но сигнал.",
+        "effects": { "health": -5, "stress": 10, "money": -8, "fragility": 5 },
+        "playerChoice": {
+          "optionA": { "text": "Пойти к врачу сразу", "effects": { "health": 3, "stress": 6, "money": -8, "fragility": -5 } },
+          "optionB": { "text": "Подождать — само пройдёт", "effects": { "health": -8, "fragility": 8, "stress": 5 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "good_energy_period",
+    "title": "Период хорошей энергии",
+    "description": "Несколько недель, когда тело работает как надо. Вы заметили, что вам хватает.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "health", "op": ">=", "value": 65 },
+        { "stat": "stress", "op": "<=", "value": 40 }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "notice",
+    "tags": ["health", "positive", "energy"],
+    "outcomes": [
+      {
+        "id": "notice",
+        "description": "Тело говорит «спасибо». Энергия накапливается.",
+        "effects": { "energy": 8, "health": 3, "stress": -5, "burnout": -5 }
+      }
+    ]
+  },
+  {
+    "id": "chronic_fatigue",
+    "title": "Хроническая усталость",
+    "description": "Это уже не усталость от конкретного дня. Это фоновое состояние, которое не уходит.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "energy", "op": "<=", "value": 25 },
+        { "stat": "burnout", "op": ">=", "value": 50 }
+      ]
+    },
+    "weight": 4,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "drag_on",
+    "tags": ["health", "burnout", "crisis"],
+    "outcomes": [
+      {
+        "id": "drag_on",
+        "description": "Вы тащитесь дальше. Тело уже не спрашивает — оно просто устало.",
+        "effects": { "energy": -8, "health": -5, "burnout": 6, "career": -4 },
+        "playerChoice": {
+          "optionA": { "text": "Взять больничный / паузу", "effects": { "energy": 12, "health": 5, "burnout": -10, "money": -6, "career": -6 } },
+          "optionB": { "text": "Держаться — нет выбора", "effects": { "energy": -8, "health": -5, "burnout": 6, "career": -4 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "injury",
+    "title": "Травма",
+    "description": "Небольшая, но неприятная. Ограничивает несколько недель.",
+    "triggerCondition": {
+      "and": [
+        { "stat": "health", "op": "<=", "value": 50 },
+        { "stat": "stress", "op": ">=", "value": 55 }
+      ]
+    },
+    "weight": 1,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "recover",
+    "tags": ["health", "setback"],
+    "outcomes": [
+      {
+        "id": "recover",
+        "description": "Пришлось замедлиться. Работа пострадала, зато тело немного отдохнуло.",
+        "effects": { "health": -8, "energy": -6, "stress": -5, "career": -4, "money": -7 }
+      }
+    ]
+  }
+]

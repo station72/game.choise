@@ -1,0 +1,23 @@
+{
+  "id": "young_family",
+  "name": "Молодая семья с ребёнком",
+  "description": "25 лет, брак + 1 ребёнок, работа средняя. Низкая гибкость, высокий уровень обязательств. Высокий риск выгорания, но больше смысла.",
+  "startingAge": 25,
+  "startingStats": {
+    "money": 35,
+    "energy": 45,
+    "health": 60,
+    "closeness": 65,
+    "career": 30,
+    "stress": 50
+  },
+  "startingHiddenStats": {
+    "burnout": 25,
+    "fragility": 25,
+    "estrangement": 15,
+    "vitality": 65
+  },
+  "startingRelationshipState": "married",
+  "traits": ["parent", "married", "high_obligations"],
+  "availablePersonalLines": ["be_needed", "leave_a_mark", "build_own", "create"]
+}

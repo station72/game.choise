@@ -1,0 +1,154 @@
+[
+  {
+    "id": "warm_start",
+    "name": "Тёплый старт",
+    "subtitle": "Семья была настоящей опорой",
+    "description": "Тебя любили, не требуя взамен. Дом был местом, куда хотелось возвращаться. Это не значит, что всё было идеально — просто ты знал, что нужен.",
+    "profile": {
+      "whoWasPresent": "both_parents",
+      "homeAtmosphere": "warm_but_poor",
+      "motherModel": "warm_accepting",
+      "fatherModel": "warm_accepting",
+      "mainLesson": "nobody_will_save_you"
+    },
+    "statModifiers": { "vitality": 10, "fragility": -5, "stress": -5 },
+    "traits": ["secure_attachment"],
+    "initialActiveLines": ["family_dream"],
+    "initialSuspendedLines": [],
+    "suggestedFear": "fear_of_loss_of_control",
+    "suggestedCompensation": "perfectionism"
+  },
+  {
+    "id": "cold_start",
+    "name": "Холодный старт",
+    "subtitle": "Тебя не обижали — просто не замечали",
+    "description": "Родители были рядом физически, но далеко эмоционально. Ты научился не нуждаться в людях — или делать вид, что не нуждаешься.",
+    "profile": {
+      "whoWasPresent": "both_parents",
+      "homeAtmosphere": "cold_and_demanding",
+      "motherModel": "cold_distant",
+      "fatherModel": "cold_distant",
+      "mainLesson": "asking_is_pointless"
+    },
+    "statModifiers": { "fragility": 10, "estrangement": 10, "vitality": -5 },
+    "traits": ["avoidant_attachment", "self_reliant"],
+    "initialActiveLines": ["career_race"],
+    "initialSuspendedLines": ["family_dream"],
+    "suggestedFear": "fear_of_loneliness",
+    "suggestedCompensation": "isolation"
+  },
+  {
+    "id": "pressure_cooker",
+    "name": "Под давлением",
+    "subtitle": "От тебя всегда ждали большего",
+    "description": "Успех был нормой, а ошибки — позором. Ты рано понял, что любовь нужно заслуживать. Теперь ты не умеешь останавливаться.",
+    "profile": {
+      "whoWasPresent": "both_parents",
+      "homeAtmosphere": "cold_and_demanding",
+      "motherModel": "cold_evaluating",
+      "fatherModel": "controlling",
+      "mainLesson": "love_must_be_earned"
+    },
+    "statModifiers": { "career": 10, "burnout": 10, "fragility": 5, "vitality": -5 },
+    "traits": ["high_achiever", "perfectionism_driven"],
+    "initialActiveLines": ["career_race", "parent_approval_father"],
+    "initialSuspendedLines": ["personal_dream"],
+    "suggestedFear": "fear_of_failure",
+    "suggestedCompensation": "perfectionism"
+  },
+  {
+    "id": "absent_father",
+    "name": "Без отца",
+    "subtitle": "Он ушёл — или никогда по-настоящему не приходил",
+    "description": "Отец был либо физически отсутствующим, либо присутствовал телом, но не душой. Ты привык опираться только на себя и маму.",
+    "profile": {
+      "whoWasPresent": "mother_only",
+      "homeAtmosphere": "warm_but_poor",
+      "motherModel": "warm_anxious",
+      "fatherModel": "absent",
+      "mainLesson": "nobody_will_save_you"
+    },
+    "statModifiers": { "fragility": 5, "money": -5, "vitality": 5 },
+    "traits": ["mother_bonded"],
+    "initialActiveLines": ["parent_approval_father", "family_dream"],
+    "initialSuspendedLines": [],
+    "suggestedFear": "fear_of_loneliness",
+    "suggestedCompensation": "people_pleasing"
+  },
+  {
+    "id": "role_inversion",
+    "name": "Взрослый ребёнок",
+    "subtitle": "Ты заботился о родителях, а не они о тебе",
+    "description": "Где-то в детстве вы поменялись ролями. Ты чувствовал ответственность за их настроение, здоровье, счастье. Это научило тебя многому — и отняло детство.",
+    "profile": {
+      "whoWasPresent": "both_parents",
+      "homeAtmosphere": "chaotic_unstable",
+      "motherModel": "emotionally_dependent",
+      "fatherModel": "soft_powerless",
+      "mainLesson": "duty_first_life_second"
+    },
+    "statModifiers": { "burnout": 10, "fragility": 10, "stress": 10, "vitality": -10 },
+    "traits": ["caretaker", "guilt_prone"],
+    "initialActiveLines": ["parent_reconciliation"],
+    "initialSuspendedLines": ["personal_dream", "own_business"],
+    "suggestedFear": "fear_of_dependence",
+    "suggestedCompensation": "people_pleasing"
+  },
+  {
+    "id": "chaotic_household",
+    "name": "Хаос дома",
+    "subtitle": "Никогда не знал, чего ожидать",
+    "description": "Дома было непредсказуемо: ссоры, переезды, смены настроения. Ты научился быстро адаптироваться и никогда не расслабляться.",
+    "profile": {
+      "whoWasPresent": "both_parents",
+      "homeAtmosphere": "chaotic_unstable",
+      "motherModel": "unpredictable",
+      "fatherModel": "chaotic",
+      "mainLesson": "cant_relax"
+    },
+    "statModifiers": { "stress": 10, "fragility": 10, "energy": -5 },
+    "traits": ["hypervigilant", "adaptable"],
+    "initialActiveLines": ["another_life_illusion"],
+    "initialSuspendedLines": ["family_dream"],
+    "suggestedFear": "fear_of_loss_of_control",
+    "suggestedCompensation": "risk_seeking"
+  },
+  {
+    "id": "golden_cage",
+    "name": "Золотая клетка",
+    "subtitle": "Всего было достаточно — кроме свободы",
+    "description": "Материально — всё. Эмоционально — контроль. Тебя любили, но на условиях. Ты получил всё, кроме права выбирать.",
+    "profile": {
+      "whoWasPresent": "both_parents",
+      "homeAtmosphere": "wealthy_but_dry",
+      "motherModel": "controlling",
+      "fatherModel": "strong_but_distant",
+      "mainLesson": "be_convenient"
+    },
+    "statModifiers": { "money": 10, "career": 5, "burnout": 5, "vitality": -8 },
+    "traits": ["approval_seeker"],
+    "initialActiveLines": ["career_race", "parent_approval_mother"],
+    "initialSuspendedLines": ["be_free"],
+    "suggestedFear": "fear_of_dependence",
+    "suggestedCompensation": "perfectionism"
+  },
+  {
+    "id": "lone_wolf_start",
+    "name": "Сам по себе",
+    "subtitle": "Рано понял: рассчитывать можно только на себя",
+    "description": "Может, родители уехали, или просто не могли дать то, что нужно. Ты вырос один — в хорошем смысле самостоятельным, в плохом — с ощущением, что близость опасна.",
+    "profile": {
+      "whoWasPresent": "one_parent_gone",
+      "homeAtmosphere": "normal_but_empty",
+      "motherModel": "sacrificial",
+      "fatherModel": "absent",
+      "mainLesson": "closeness_is_dangerous"
+    },
+    "statModifiers": { "estrangement": 15, "fragility": 5, "energy": 5 },
+    "traits": ["lone_wolf", "self_reliant"],
+    "initialActiveLines": ["own_business", "personal_dream"],
+    "initialSuspendedLines": ["family_dream"],
+    "suggestedFear": "fear_of_loneliness",
+    "suggestedCompensation": "isolation"
+  }
+]

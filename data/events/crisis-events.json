@@ -1,0 +1,115 @@
+[
+  {
+    "id": "meaning_crisis",
+    "title": "Кризис смысла",
+    "description": "Однажды утром вы просыпаетесь и думаете: «Зачем всё это?» Не риторически — по-настоящему.",
+    "triggerCondition": {
+      "or": [
+        { "stat": "vitality", "op": "<=", "value": 20 },
+        { "flag": "meaning_crisis_risk" }
+      ]
+    },
+    "weight": 4,
+    "cooldownMonths": 8,
+    "defaultOutcomeId": "drift_through",
+    "tags": ["inner", "crisis", "meaning"],
+    "outcomes": [
+      {
+        "id": "drift_through",
+        "description": "Вы продолжаете по инерции. Вопрос остался без ответа.",
+        "effects": { "vitality": -8, "stress": 8, "career": -3 },
+        "playerChoice": {
+          "optionA": { "text": "Остановиться и честно посмотреть", "effects": { "vitality": 5, "stress": 10, "career": -5, "energy": -8 } },
+          "optionB": { "text": "Загрузить себя ещё больше", "effects": { "career": 3, "vitality": -10, "burnout": 8, "stress": 6 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "financial_crisis",
+    "title": "Финансовый сбой",
+    "description": "Неожиданный крупный расход ударил по счёту.",
+    "triggerCondition": {
+      "or": [
+        { "stat": "money", "op": "<=", "value": 25 },
+        {
+          "and": [
+            { "stat": "money", "op": "<=", "value": 40 },
+            { "hasTag": "risk" }
+          ]
+        }
+      ]
+    },
+    "weight": 3,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "scramble",
+    "tags": ["financial", "crisis", "stress"],
+    "outcomes": [
+      {
+        "id": "scramble",
+        "description": "Приходится закрывать дыру. Нервно, стрессово.",
+        "effects": { "money": -15, "stress": 14, "energy": -8, "fragility": 5 },
+        "playerChoice": {
+          "optionA": { "text": "Занять у близких", "effects": { "money": -8, "stress": 10, "closeness": -5 } },
+          "optionB": { "text": "Резать расходы на всё", "effects": { "money": -10, "stress": 12, "vitality": -5 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "envy_comparison",
+    "title": "Зависть и сравнение",
+    "description": "Лента пестрит чужими успехами. Коллега получил то, что хотели вы.",
+    "triggerCondition": {
+      "or": [
+        {
+          "and": [
+            { "stat": "career", "op": "<=", "value": 40 },
+            { "stat": "vitality", "op": "<=", "value": 50 }
+          ]
+        },
+        { "hasTag": "avoidance" }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "stings",
+    "tags": ["inner", "comparison", "emotional"],
+    "outcomes": [
+      {
+        "id": "stings",
+        "description": "Укол зависти. Вы знаете, что это бессмысленно. Но всё равно больно.",
+        "effects": { "stress": 8, "vitality": -5, "career": -2 },
+        "playerChoice": {
+          "optionA": { "text": "Использовать как топливо", "effects": { "career": 5, "stress": 6, "burnout": 4 } },
+          "optionB": { "text": "Честно признать — мне больно", "effects": { "vitality": 3, "stress": -3, "fragility": -3 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "parent_ill",
+    "title": "Родитель заболел",
+    "description": "Звонок из дома. Родитель попал в больницу. Ничего критичного пока, но.",
+    "triggerCondition": {
+      "stat": "totalMonths",
+      "op": ">=",
+      "value": 36
+    },
+    "weight": 1,
+    "cooldownMonths": 24,
+    "defaultOutcomeId": "help",
+    "tags": ["family", "crisis", "emotional"],
+    "outcomes": [
+      {
+        "id": "help",
+        "description": "Поехали. Деньги ушли. Время ушло. Но вы были там.",
+        "effects": { "money": -12, "energy": -10, "stress": 12, "closeness": 6, "vitality": 5 },
+        "playerChoice": {
+          "optionA": { "text": "Поехать и быть рядом", "effects": { "money": -12, "energy": -10, "stress": 12, "closeness": 6, "vitality": 5 } },
+          "optionB": { "text": "Помочь дистанционно", "effects": { "money": -8, "stress": 8, "closeness": -3 } }
+        }
+      }
+    ]
+  }
+]

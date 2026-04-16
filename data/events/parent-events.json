@@ -1,0 +1,113 @@
+[
+  {
+    "id": "parent_call_unexpected",
+    "triggerCondition": {
+      "and": [
+        { "stat": "totalMonths", "op": ">=", "value": 6 },
+        { "not": { "flag": "relationship_estranged_parents" } }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "awkward",
+    "outcomes": [
+      {
+        "id": "awkward",
+        "text": "Мама позвонила. Голос немного неловкий — как будто она тоже не знает, что говорить. Вы поговорили ни о чём. И всё же стало немного теплее.",
+        "effects": { "closeness": 3, "stress": -3 }
+      }
+    ]
+  },
+  {
+    "id": "parent_needs_help",
+    "triggerCondition": {
+      "and": [
+        { "stat": "totalMonths", "op": ">=", "value": 24 },
+        { "not": { "flag": "carrying_parents" } }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 18,
+    "defaultOutcomeId": "help_or_not",
+    "outcomes": [
+      {
+        "id": "help_or_not",
+        "text": "Отец попросил денег. Не много, но вопрос не в сумме — в том, как это задело что-то внутри.",
+        "effects": {},
+        "playerChoice": {
+          "optionA": {
+            "text": "Помогу — он же родной",
+            "effects": { "money": -8, "closeness": 5, "stress": 3 }
+          },
+          "optionB": {
+            "text": "Извинюсь, но откажу",
+            "effects": { "stress": 8, "vitality": -3, "fragility": 3 }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "carrying_parents_drain",
+    "triggerCondition": { "flag": "carrying_parents" },
+    "weight": 4,
+    "cooldownMonths": 6,
+    "defaultOutcomeId": "drain",
+    "outcomes": [
+      {
+        "id": "drain",
+        "text": "Снова ты решаешь их проблемы. Это стало нормой — и от этого только хуже. Где-то внутри накапливается усталость, которую трудно признать.",
+        "effects": { "energy": -8, "burnout": 5, "stress": 5 }
+      }
+    ]
+  },
+  {
+    "id": "parent_reconciliation_moment",
+    "triggerCondition": {
+      "and": [
+        { "flag": "closed_parent_reconciliation" },
+        { "stat": "totalMonths", "op": ">=", "value": 36 }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 24,
+    "defaultOutcomeId": "let_go",
+    "outcomes": [
+      {
+        "id": "let_go",
+        "text": "Ты перестал ждать, что что-то изменится. Не со злостью — просто принял, что этих отношений, которых ты хотел, не будет. Это больно. И немного освобождает.",
+        "effects": { "vitality": -5, "stress": -10, "fragility": -5 }
+      }
+    ]
+  },
+  {
+    "id": "parent_illness",
+    "triggerCondition": {
+      "and": [
+        { "stat": "totalMonths", "op": ">=", "value": 48 },
+        { "not": { "flag": "parent_illness_event_done" } }
+      ]
+    },
+    "weight": 2,
+    "cooldownMonths": 999,
+    "defaultOutcomeId": "illness_response",
+    "outcomes": [
+      {
+        "id": "illness_response",
+        "text": "Маме поставили диагноз. Не смертельный, но серьёзный. Ты не знаешь, как реагировать — она сама ещё не осознала.",
+        "effects": { "stress": 10, "fragility": 8 },
+        "flagsSet": ["parent_illness_event_done"],
+        "playerChoice": {
+          "optionA": {
+            "text": "Взять ситуацию под контроль — помогать, организовывать",
+            "effects": { "energy": -10, "burnout": 8, "closeness": 5 }
+          },
+          "optionB": {
+            "text": "Быть рядом эмоционально, но беречь себя",
+            "effects": { "stress": 5, "vitality": -3, "closeness": 8 }
+          }
+        }
+      }
+    ]
+  }
+]

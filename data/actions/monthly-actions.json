@@ -1,0 +1,133 @@
+[
+  {
+    "id": "career_push",
+    "name": "Карьерный рывок",
+    "description": "Всё время и силы — на работу и профессиональный рост.",
+    "baseEffects": {
+      "career": 8,
+      "money": 5,
+      "energy": -12,
+      "stress": 10,
+      "closeness": -5
+    },
+    "repeatEffects": {
+      "career": 6,
+      "money": 4,
+      "energy": -15,
+      "stress": 14,
+      "closeness": -7,
+      "burnout": 8
+    },
+    "tags": ["work", "overworked", "career_focus"],
+    "availableIf": null
+  },
+  {
+    "id": "financial_stability",
+    "name": "Финансовая устойчивость",
+    "description": "Копить, ужиматься, снижать риски. Меньше удовольствия, выше устойчивость.",
+    "baseEffects": {
+      "money": 12,
+      "stress": -5,
+      "vitality": -3,
+      "closeness": -3,
+      "energy": -5
+    },
+    "tags": ["saving", "frugal", "financial_focus"],
+    "availableIf": null
+  },
+  {
+    "id": "own_project",
+    "name": "Риск / своё дело",
+    "description": "Вложить время и силы в свой проект или идею. Шанс на рывок, но выше стресс.",
+    "baseEffects": {
+      "stress": 12,
+      "energy": -10,
+      "money": -8,
+      "vitality": 8,
+      "career": -3
+    },
+    "repeatEffects": {
+      "stress": 15,
+      "energy": -12,
+      "money": -10,
+      "vitality": 10,
+      "career": -2,
+      "burnout": 5
+    },
+    "tags": ["risk", "own_project", "creative", "personal_line"],
+    "availableIf": null
+  },
+  {
+    "id": "relationships",
+    "name": "Отношения",
+    "description": "Работа на близость, ремонт связи, время с партнёром, честный разговор.",
+    "baseEffects": {
+      "closeness": 12,
+      "estrangement": -8,
+      "energy": -6,
+      "career": -4,
+      "stress": -5
+    },
+    "tags": ["relationship", "connection", "emotional"],
+    "availableIf": {
+      "not": { "flag": "relationship_single" }
+    }
+  },
+  {
+    "id": "family_child",
+    "name": "Семья / ребёнок",
+    "description": "Вложение в дом, быт, присутствие, воспитание. Поддерживает близость и смысл.",
+    "baseEffects": {
+      "closeness": 8,
+      "vitality": 5,
+      "energy": -8,
+      "money": -6,
+      "career": -3
+    },
+    "tags": ["family", "home", "parenting", "connection"],
+    "availableIf": null
+  },
+  {
+    "id": "recovery",
+    "name": "Здоровье / восстановление",
+    "description": "Отдых, сон, лечение, спорт. Замедляет карьеру, но восстанавливает тело.",
+    "baseEffects": {
+      "energy": 15,
+      "health": 8,
+      "stress": -12,
+      "burnout": -10,
+      "career": -3,
+      "money": -4
+    },
+    "tags": ["rest", "health", "self_care", "recovery"],
+    "availableIf": null
+  },
+  {
+    "id": "personal_line",
+    "name": "Личная линия",
+    "description": "Время на своё: музыка, письмо, проект, мастерство, поездка, свобода.",
+    "baseEffects": {
+      "vitality": 10,
+      "stress": -6,
+      "energy": -8,
+      "money": -5,
+      "career": -3
+    },
+    "tags": ["personal_line", "creative", "self_expression", "freedom"],
+    "availableIf": null
+  },
+  {
+    "id": "avoidance",
+    "name": "Заморозка / избегание",
+    "description": "Ничего не решать, переждать, спрятаться в рутину.",
+    "baseEffects": {
+      "stress": -4,
+      "vitality": -5,
+      "energy": 3,
+      "career": -2,
+      "estrangement": 3
+    },
+    "tags": ["avoidance", "passive", "routine"],
+    "availableIf": null
+  }
+]
