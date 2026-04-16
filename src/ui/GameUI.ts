@@ -25,6 +25,7 @@ export class GameUI {
 
   private state: GameState | null = null;
   private pendingTurnResult: TurnResult | null = null;
+  private eventCursor = 0;
 
   constructor(
     container: HTMLElement,
@@ -180,6 +181,7 @@ export class GameUI {
     );
 
     this.pendingTurnResult = result;
+    this.eventCursor = 0;
 
     // Always show animation first, then proceed to events / next month
     this.router.navigate("animation");
@@ -189,7 +191,27 @@ export class GameUI {
     if (!this.pendingTurnResult) return;
     const result = this.pendingTurnResult;
 
-    if (result.pendingChoice) {
+    const resolvedCount = result.resolvedOutcomes.length;
+    const pendingIndex = result.pendingChoice ? resolvedCount : -1;
+
+    // 1) Show already-resolved outcomes in order.
+    if (this.eventCursor < resolvedCount) {
+      const event = result.triggeredEvents[this.eventCursor];
+      const outcome = result.resolvedOutcomes[this.eventCursor];
+      const delta = outcome.effects;
+      this.eventScreen.renderOutcome(event, outcome, delta, {
+        onChoice: () => { /* Not used here */ },
+        onContinue: () => {
+          this.eventCursor++;
+          this.showEvent();
+        },
+      });
+      this.eventScreen.show();
+      return;
+    }
+
+    // 2) Then show the pending player choice (if any).
+    if (result.pendingChoice && this.eventCursor === pendingIndex) {
       const { event, outcome } = result.pendingChoice;
       this.eventScreen.renderPendingChoice(event, outcome, {
         onChoice: (optionId) => {
@@ -197,21 +219,14 @@ export class GameUI {
         },
         onContinue: () => { /* Not used here */ },
       });
-    } else if (result.resolvedOutcomes.length > 0) {
-      const event = result.triggeredEvents[0];
-      const outcome = result.resolvedOutcomes[0];
-      const delta = outcome.effects;
-      this.eventScreen.renderOutcome(event, outcome, delta, {
-        onChoice: () => { /* Not used here */ },
-        onContinue: () => {
-          this.state = result.newState;
-          saveGame(this.state);
-          this.afterTurn(result);
-        },
-      });
+      this.eventScreen.show();
+      return;
     }
 
-    this.eventScreen.show();
+    // 3) All events are done — now we can commit the turn state and advance.
+    this.state = result.newState;
+    saveGame(this.state);
+    this.afterTurn(result);
   }
 
   private applyPlayerChoice(
@@ -238,19 +253,13 @@ export class GameUI {
       },
     };
 
-    this.pendingTurnResult = {
-      ...pendingResult,
-      pendingChoice: null,
-      newState: choiceState,
-      resolvedOutcomes: [outcome],
-    };
+    this.pendingTurnResult = { ...pendingResult, pendingChoice: null, newState: choiceState };
 
     this.eventScreen.renderOutcome(event, outcome, choice.effects, {
       onChoice: () => {},
       onContinue: () => {
-        this.state = choiceState;
-        saveGame(this.state);
-        this.afterTurn({ ...pendingResult, newState: choiceState, pendingChoice: null });
+        this.eventCursor++;
+        this.showEvent();
       },
     });
   }

@@ -8,6 +8,7 @@ import { StatsEngine } from "./StatsEngine.js";
 import { EventEngine } from "./EventEngine.js";
 import { applyChildCosts } from "./rules/childRules.js";
 import { calculateDefocusDelta, getActionEffectivenessMultiplier } from "./rules/defocusRules.js";
+import { getEnergyEffectivenessMultiplier } from "./rules/energyRules.js";
 import { RNG } from "../utils/rng.js";
 
 export interface PendingChoice {
@@ -56,10 +57,50 @@ export class TurnResolver {
     const actionRepeatCounts = { ...state.actionRepeatCounts };
     const supportYearCounts = { ...state.supportActionYearCounts };
     const eventCooldowns = { ...state.eventCooldowns };
+    let yearSurprises = state.yearSurprises
+      ? { ...state.yearSurprises }
+      : undefined;
 
     const statsBefore = { ...s };
     const triggeredEvents: EventCard[] = [];
     const resolvedOutcomes: EventOutcome[] = [];
+
+    // Roll the year's "surprise schedule" at the start of each in-game year (month 1).
+    // Normal year: 1 surprise; unlucky year: 3 surprises spread across the year (one per turn).
+    if (state.character.month === 1 && yearSurprises?.year !== state.character.year) {
+      const unlucky = rng.next() < 0.18;
+      yearSurprises = {
+        year: state.character.year,
+        remaining: unlucky ? 3 : 1,
+        unlucky,
+      };
+    }
+
+    // Energy debuff reduces the effectiveness of *beneficial* positive gains.
+    // Note: we intentionally do NOT scale energy itself here (so "rest" still restores energy),
+    // and we keep event outcomes unscaled (events are already "the world happening to you").
+    const energyEffectiveness = getEnergyEffectivenessMultiplier(s.energy);
+    const applyEnergyDebuff = (delta: StatDelta): StatDelta => {
+      if (energyEffectiveness >= 0.999) return delta;
+      const scaled: StatDelta = { ...delta };
+
+      const keys: Array<keyof StatDelta> = [
+        "money",
+        "health",
+        "closeness",
+        "career",
+        "vitality",
+      ];
+
+      for (const k of keys) {
+        const v = scaled[k];
+        if (typeof v === "number" && v > 0) {
+          scaled[k] = (v * energyEffectiveness) as any;
+        }
+      }
+
+      return scaled;
+    };
 
     // ---- PHASE 1: ACTION EFFECTS ----
     // Defocus reduces the effectiveness of positive stat gains from actions
@@ -72,7 +113,12 @@ export class TurnResolver {
       ? action.repeatEffects!
       : action.baseEffects;
 
-    ({ stats: s, hiddenStats: h } = this.statsEngine.applyDelta(s, h, actionDelta, actionEffectiveness));
+    ({ stats: s, hiddenStats: h } = this.statsEngine.applyDelta(
+      s,
+      h,
+      applyEnergyDebuff(actionDelta),
+      actionEffectiveness
+    ));
 
     // Reset repeat counts for all OTHER actions
     for (const id in actionRepeatCounts) {
@@ -100,7 +146,7 @@ export class TurnResolver {
         ({ stats: s, hiddenStats: h } = this.statsEngine.applyDelta(
           s,
           h,
-          support.effects
+          applyEnergyDebuff(support.effects)
         ));
         supportYearCounts[support.id] = yearCount + 1;
       }
@@ -120,7 +166,39 @@ export class TurnResolver {
       ...action.tags,
       ...(support?.tags ?? []),
     ];
-    const events = this.eventEngine.selectEvents(allEvents, state, allTags, rng);
+
+    // Annual surprises are forced by schedule and excluded from the regular event pool.
+    const SURPRISE_TAG = "annual_surprise";
+    const getTags = (e: EventCard): string[] => Array.isArray((e as any).tags) ? (e as any).tags : [];
+    const isSurprise = (e: EventCard) => getTags(e).includes(SURPRISE_TAG);
+
+    const surprisePool = allEvents.filter(isSurprise);
+    const normalPool = allEvents.filter((e) => !isSurprise(e));
+
+    const shouldForceSurprise =
+      yearSurprises !== undefined &&
+      yearSurprises.year === state.character.year &&
+      yearSurprises.remaining > 0;
+
+    const forcedSurprise = shouldForceSurprise
+      ? this.eventEngine.selectEvents(surprisePool, state, [], rng, {
+          maxEvents: 1,
+          secondEventChance: 0,
+        })
+      : [];
+
+    if (forcedSurprise.length > 0 && yearSurprises) {
+      yearSurprises = {
+        ...yearSurprises,
+        remaining: Math.max(0, yearSurprises.remaining - 1),
+      };
+    }
+
+    const normalEvents = this.eventEngine.selectEvents(normalPool, state, allTags, rng, {
+      maxEvents: forcedSurprise.length > 0 ? 1 : 2,
+    });
+
+    const events = [...forcedSurprise, ...normalEvents];
 
     let pendingChoice: PendingChoice | null = null;
 
@@ -275,6 +353,7 @@ export class TurnResolver {
       supportActionYearCounts: newSupportYearCounts,
       eventCooldowns,
       history: [...state.history, record],
+      yearSurprises,
     };
 
     const yearComplete = yearCrossed;

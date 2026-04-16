@@ -120,6 +120,17 @@ body {
 .month__header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 .month__date { color: var(--text-dim); font-size: 13px; }
 .badge { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); font-size: 10px; padding: 2px 6px; }
+.month__status {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg2) 70%, transparent);
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+.month__status--tired { border-color: var(--weak); color: var(--weak); }
+.month__status--exhausted { border-color: var(--crisis); color: var(--crisis); }
 .month__sections { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .month__section-title { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
 .hint { font-size: 10px; }
@@ -137,6 +148,7 @@ body {
 .action-item--disabled .action-item__inner { opacity: 0.35; cursor: not-allowed; }
 .action-item__name { font-size: 12px; margin-bottom: 2px; }
 .action-item__desc { font-size: 11px; color: var(--text-dim); }
+.action-item__meta { margin-top: 4px; font-size: 10px; color: var(--text-dim); }
 
 /* ---- Event Screen ---- */
 .event__card {
@@ -288,4 +300,3 @@ body {
 .btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
 .btn--danger { border-color: var(--crisis); color: var(--crisis); background: transparent; }
 .btn--danger:hover { background: color-mix(in srgb, var(--crisis) 15%, transparent); }
-

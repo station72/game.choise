@@ -12,7 +12,13 @@ export class EventEngine {
     allEvents: EventCard[],
     state: GameState,
     actionTags: string[],
-    rng: RNG
+    rng: RNG,
+    options?: {
+      /** Default: 2 */
+      maxEvents?: number;
+      /** Probability to pick a second event when available. Default: 0.3 */
+      secondEventChance?: number;
+    }
   ): EventCard[] {
     const { character, flags, eventCooldowns } = state;
     const flagSet = new Set(flags);
@@ -87,11 +93,12 @@ export class EventEngine {
     const results: EventCard[] = [];
     const pool = [...candidates];
 
-    const maxEvents = Math.min(2, pool.length);
+    const maxEvents = Math.min(options?.maxEvents ?? 2, pool.length);
+    const secondChance = options?.secondEventChance ?? 0.3;
     for (let i = 0; i < maxEvents; i++) {
       if (pool.length === 0) break;
       // Only pick a second event 30% of the time
-      if (i === 1 && rng.next() > 0.3) break;
+      if (i === 1 && rng.next() > secondChance) break;
 
       const picked = rng.weightedPick(pool, (e) => e.weight);
       results.push(picked);

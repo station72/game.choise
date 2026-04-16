@@ -167,4 +167,96 @@ describe("TurnResolver", () => {
     const result = resolver.resolve(state, recoveryAction, null, [], rng);
     expect(result.gameComplete).toBe(true);
   });
+
+  it("forces 1 annual surprise when scheduled", () => {
+    const state = makeState({
+      yearSurprises: { year: 1, remaining: 1, unlucky: false },
+    });
+
+    const annualEvent = {
+      id: "annual_surprise_test_one",
+      title: "Test",
+      description: "Test",
+      triggerCondition: { stat: "money", op: ">=", value: 0 },
+      weight: 1,
+      cooldownMonths: 12,
+      defaultOutcomeId: "ok",
+      tags: ["annual_surprise"],
+      outcomes: [{ id: "ok", description: "ok", effects: { stress: 1 } }],
+    };
+
+    const result = resolver.resolve(state, recoveryAction, null, [annualEvent as any], makeRNG(1));
+    expect(result.triggeredEvents.map((e) => e.id)).toContain("annual_surprise_test_one");
+    expect(result.newState.yearSurprises?.year).toBe(1);
+    expect(result.newState.yearSurprises?.remaining).toBe(0);
+  });
+
+  it("unlucky year schedule forces 3 annual surprises across the year", () => {
+    let state = makeState({
+      yearSurprises: { year: 1, remaining: 3, unlucky: true },
+    });
+
+    const annualEvents = [
+      {
+        id: "annual_surprise_test_a",
+        title: "A",
+        description: "A",
+        triggerCondition: { stat: "money", op: ">=", value: 0 },
+        weight: 1,
+        cooldownMonths: 12,
+        defaultOutcomeId: "ok",
+        tags: ["annual_surprise"],
+        outcomes: [{ id: "ok", description: "ok", effects: { stress: 1 } }],
+      },
+      {
+        id: "annual_surprise_test_b",
+        title: "B",
+        description: "B",
+        triggerCondition: { stat: "money", op: ">=", value: 0 },
+        weight: 1,
+        cooldownMonths: 12,
+        defaultOutcomeId: "ok",
+        tags: ["annual_surprise"],
+        outcomes: [{ id: "ok", description: "ok", effects: { stress: 1 } }],
+      },
+      {
+        id: "annual_surprise_test_c",
+        title: "C",
+        description: "C",
+        triggerCondition: { stat: "money", op: ">=", value: 0 },
+        weight: 1,
+        cooldownMonths: 12,
+        defaultOutcomeId: "ok",
+        tags: ["annual_surprise"],
+        outcomes: [{ id: "ok", description: "ok", effects: { stress: 1 } }],
+      },
+    ] as any[];
+
+    const rng = makeRNG(123);
+
+    // Turn 1 (month 1 -> 4): surprise #1
+    let r1 = resolver.resolve(state, recoveryAction, null, annualEvents, rng);
+    expect(r1.triggeredEvents.length).toBe(1);
+    state = r1.newState;
+    expect(state.character.month).toBe(4);
+    expect(state.yearSurprises?.remaining).toBe(2);
+
+    // Turn 2 (month 4 -> 7): surprise #2
+    let r2 = resolver.resolve(state, recoveryAction, null, annualEvents, rng);
+    expect(r2.triggeredEvents.length).toBe(1);
+    state = r2.newState;
+    expect(state.character.month).toBe(7);
+    expect(state.yearSurprises?.remaining).toBe(1);
+
+    // Turn 3 (month 7 -> 10): surprise #3
+    let r3 = resolver.resolve(state, recoveryAction, null, annualEvents, rng);
+    expect(r3.triggeredEvents.length).toBe(1);
+    state = r3.newState;
+    expect(state.character.month).toBe(10);
+    expect(state.yearSurprises?.remaining).toBe(0);
+
+    // Turn 4 (month 10 -> next year): no more forced surprises this year
+    let r4 = resolver.resolve(state, recoveryAction, null, annualEvents, rng);
+    expect(r4.triggeredEvents.length).toBe(0);
+  });
 });

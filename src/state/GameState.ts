@@ -8,6 +8,15 @@ export interface ClosedLineRecord {
   closedAtMonth: number;
 }
 
+export interface YearSurprisesState {
+  /** In-game year number this schedule applies to */
+  year: number;
+  /** How many forced "annual surprises" are still pending for this year */
+  remaining: number;
+  /** True when the year was rolled as an "unlucky year" (3 surprises). */
+  unlucky?: boolean;
+}
+
 export interface GameState {
   character: CharacterProfile;
   composition: LifeComposition;
@@ -23,6 +32,8 @@ export interface GameState {
   rngSeed: number;
   /** History of lines closed forever — used for grief/regret event targeting */
   closedLineHistory: ClosedLineRecord[];
+  /** Optional forced-surprise schedule (backwards-compatible with old saves). */
+  yearSurprises?: YearSurprisesState;
 }
 
 export function flagsAsSet(state: GameState): Set<string> {

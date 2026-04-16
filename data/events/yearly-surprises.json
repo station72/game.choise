@@ -1,0 +1,198 @@
+[
+  {
+    "id": "annual_surprise_broken_phone",
+    "title": "Телефон умер",
+    "description": "Утром вы понимаете: экран больше не включается. Ничего трагичного, но всё завязано на нём — связи, дела, доступы.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 3,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "fix",
+    "tags": ["annual_surprise", "surprise", "daily"],
+    "outcomes": [
+      {
+        "id": "fix",
+        "description": "Приходится решать быстро, как обычно.",
+        "effects": {},
+        "playerChoice": {
+          "optionA": { "text": "Купить новый и закрыть вопрос", "effects": { "money": -12, "stress": -2 } },
+          "optionB": { "text": "Починить и потерпеть пару недель", "effects": { "money": -6, "stress": 4, "vitality": -2 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_unexpected_bill",
+    "title": "Счёт, которого не ждали",
+    "description": "Приходит уведомление о платеже: старый долг, штраф или забытая подписка. Мелочь по сути, но в голове щёлкает.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 3,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "pay",
+    "tags": ["annual_surprise", "surprise", "financial"],
+    "outcomes": [
+      {
+        "id": "pay",
+        "description": "Вы платите и злитесь на себя — не за деньги, за невнимательность.",
+        "effects": { "money": -8, "stress": 8, "fragility": 2 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_lost_wallet",
+    "title": "Потерянный кошелёк",
+    "description": "То ли в магазине, то ли в такси. Карточки блокируются, наличка исчезает, и день сразу становится короче.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "scramble",
+    "tags": ["annual_surprise", "surprise", "financial", "stress"],
+    "outcomes": [
+      {
+        "id": "scramble",
+        "description": "Всё решаемо. Но сколько сил это съедает — удивительно.",
+        "effects": { "money": -10, "stress": 12, "energy": -6, "fragility": 3 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_small_accident",
+    "title": "Неловкое повреждение",
+    "description": "Спина потянулась, колено щёлкнуло, или вы просто неудачно повернулись. Мелко, но тело напоминает: ресурс конечен.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "slow_down",
+    "tags": ["annual_surprise", "surprise", "health"],
+    "outcomes": [
+      {
+        "id": "slow_down",
+        "description": "Вы пару недель живёте осторожнее, чем хотелось бы.",
+        "effects": { "health": -6, "energy": -5, "stress": 6, "fragility": 4 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_sudden_flu",
+    "title": "Болезнь на пустом месте",
+    "description": "Вчера было нормально. Сегодня — температура, туман в голове и ощущение, что мир идёт без вас.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "ride_it_out",
+    "tags": ["annual_surprise", "surprise", "health", "body"],
+    "outcomes": [
+      {
+        "id": "ride_it_out",
+        "description": "Вы выкарабкиваетесь. Но график ломается, и нерв тоже.",
+        "effects": { "health": -8, "energy": -10, "stress": 10, "fragility": 3 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_old_friend",
+    "title": "Старый друг",
+    "description": "Пишет человек, с которым вы давно не общались. Не по делу — просто так. И это почему-то трогает.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "meet",
+    "tags": ["annual_surprise", "surprise", "social", "connection"],
+    "outcomes": [
+      {
+        "id": "meet",
+        "description": "Вы встречаетесь. На пару часов жизнь становится шире.",
+        "effects": { "closeness": 8, "stress": -6, "vitality": 4, "energy": -3 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_neighbor_conflict",
+    "title": "Конфликт с соседями",
+    "description": "Шум, ремонт, чужие правила. Вы пытаетесь говорить спокойно, но внутри всё кипит.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "friction",
+    "tags": ["annual_surprise", "surprise", "stress", "daily"],
+    "outcomes": [
+      {
+        "id": "friction",
+        "description": "Вроде ерунда. Но это ерунда, которая выматывает.",
+        "effects": { "stress": 10, "energy": -4, "vitality": -2 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_random_opportunity",
+    "title": "Случайная возможность",
+    "description": "Кто-то внезапно предлагает маленький проект или рекомендацию. Не гарантировано, но шанс есть.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "decide",
+    "tags": ["annual_surprise", "surprise", "career", "chance"],
+    "outcomes": [
+      {
+        "id": "decide",
+        "description": "Это не меняет жизнь сразу. Но делает траекторию чуть другой.",
+        "effects": {},
+        "playerChoice": {
+          "optionA": { "text": "Взять и вписаться", "effects": { "career": 6, "money": 6, "stress": 8, "energy": -6, "burnout": 3 } },
+          "optionB": { "text": "Отказаться и сохранить ресурс", "effects": { "stress": -2, "vitality": 2 } }
+        }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_lucky_refund",
+    "title": "Неожиданный возврат",
+    "description": "Вдруг приходит возврат за покупку или перерасчёт. Деньги небольшие, но ощущение — будто вам дали немного воздуха.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "relief",
+    "tags": ["annual_surprise", "surprise", "financial", "positive"],
+    "outcomes": [
+      {
+        "id": "relief",
+        "description": "Маленькая удача. Маленький выдох.",
+        "effects": { "money": 10, "stress": -6, "vitality": 2 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_family_matter",
+    "title": "Семейное дело",
+    "description": "Кому-то из семьи нужна помощь: отвезти, оформить, поддержать, быть рядом. Это не спор, это просьба.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 2,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "help",
+    "tags": ["annual_surprise", "surprise", "family", "emotional"],
+    "outcomes": [
+      {
+        "id": "help",
+        "description": "Вы помогаете. Это правильно. И это тоже цена.",
+        "effects": { "energy": -6, "stress": 8, "closeness": 4, "vitality": 2 }
+      }
+    ]
+  },
+  {
+    "id": "annual_surprise_new_hobby",
+    "title": "Новая штука зацепила",
+    "description": "Неожиданно вы находите тему, которая вовлекает. Без пользы. Просто интерес и живость.",
+    "triggerCondition": { "stat": "money", "op": ">=", "value": 0 },
+    "weight": 1,
+    "cooldownMonths": 12,
+    "defaultOutcomeId": "spark",
+    "tags": ["annual_surprise", "surprise", "personal_line", "positive"],
+    "outcomes": [
+      {
+        "id": "spark",
+        "description": "Становится чуть легче дышать.",
+        "effects": { "vitality": 8, "stress": -4, "defocus": 3 }
+      }
+    ]
+  }
+]
+

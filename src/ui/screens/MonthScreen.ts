@@ -73,12 +73,37 @@ export class MonthScreen {
 
     const supportItems = supportActions
       .map((a) => {
-        const available = isAvailable(a.availableIf);
-        return `<label class="action-item action-item--support ${available ? "" : "action-item--disabled"}">
+        const yearCount = state.supportActionYearCounts[a.id] ?? 0;
+        const underLimit = a.maxPerYear === undefined || yearCount < a.maxPerYear;
+        const hasEnergy = a.energyCost === undefined || state.character.stats.energy >= a.energyCost;
+        const hasMoney = a.moneyCost === undefined || state.character.stats.money >= a.moneyCost;
+
+        const available =
+          isAvailable(a.availableIf) &&
+          underLimit &&
+          hasEnergy &&
+          hasMoney;
+
+        const reasons: string[] = [];
+        if (!underLimit && a.maxPerYear !== undefined) reasons.push(`Лимит: ${yearCount}/${a.maxPerYear} в этом году`);
+        if (!hasEnergy && a.energyCost !== undefined) reasons.push(`Нужно энергии: ${a.energyCost}`);
+        if (!hasMoney && a.moneyCost !== undefined) reasons.push(`Нужно денег: ${a.moneyCost}`);
+        const title = reasons.join(" | ");
+
+        const metaParts: string[] = [];
+        if (a.energyCost) metaParts.push(`−${a.energyCost} энергии`);
+        if (a.moneyCost) metaParts.push(`−${a.moneyCost} денег`);
+        if (a.maxPerYear !== undefined) metaParts.push(`${yearCount}/${a.maxPerYear} в год`);
+        const metaHtml = metaParts.length
+          ? `<div class="action-item__meta">${metaParts.join(" · ")}</div>`
+          : "";
+
+        return `<label class="action-item action-item--support ${available ? "" : "action-item--disabled"}" ${title ? `title="${title}"` : ""}>
           <input type="radio" name="support-action" value="${a.id}" ${available ? "" : "disabled"} />
           <div class="action-item__inner">
             <div class="action-item__name">${a.name}</div>
             <div class="action-item__desc">${a.description}</div>
+            ${metaHtml}
           </div>
         </label>`;
       })
@@ -95,6 +120,18 @@ export class MonthScreen {
     const childNote = state.character.hasChild
       ? `<span class="badge">Ребёнок</span>`
       : "";
+
+    const energy = state.character.stats.energy;
+    const energyStatus =
+      energy <= 0
+        ? `<div class="month__status month__status--exhausted">
+            Истощение: полезные приросты становятся слабее, а в конце хода растёт стресс и падает здоровье. Найди способ восстановиться.
+          </div>`
+        : energy <= 10
+          ? `<div class="month__status month__status--tired">
+              Усталость: полезные приросты слабее, стресс растёт быстрее. Лучше сперва восстановить энергию.
+            </div>`
+          : "";
 
     // Life lines panel (only show if there are any lines)
     const visibleLines = state.character.lifeLines.filter(
@@ -136,6 +173,7 @@ export class MonthScreen {
         <span class="month__date">${monthRangeLabel} · Год ${year} · ${age} лет</span>
         ${childNote}
       </div>
+      ${energyStatus}
       <div class="month__sections">
         <div class="month__section">
           <div class="month__section-title">Главная ставка — <span class="hint">на следующие 3 месяца</span></div>
